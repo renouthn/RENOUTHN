@@ -120,7 +120,11 @@
     <section id="contact" class="card contact-card">
       <h2>Contacto</h2>
       <p>Déjanos tus datos y te contactamos en breve.</p>
-      <form id="contactForm" action="https://formspree.io/f/mqevjpng" method="POST">
+      <!--
+        data-sheet-endpoint: (opcional) URL de Google Apps Script web app para guardar en Google Sheets
+        data-email-endpoint: (opcional) webhook para enviar copias por email
+      -->
+      <form id="contactForm" action="https://formspree.io/f/mqevjpng" method="POST" data-sheet-endpoint="" data-email-endpoint="">
         <div class="form-grid">
           <input type="text" name="name" placeholder="Nombre completo" required>
           <input type="email" name="email" placeholder="Correo electrónico" required>

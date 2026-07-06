@@ -22,10 +22,46 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('contactForm');
   const statusEl = document.getElementById('formStatus');
 
+  // validation helpers
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+  function validatePhone(phone) {
+    // simple international-friendly check: digits, spaces, +, -, ()
+    return phone.trim() === '' || /^[-+() 0-9]{6,20}$/.test(phone);
+  }
+
+  function showFieldError(el, msg) {
+    let next = el.nextElementSibling;
+    if (!next || !next.classList || !next.classList.contains('field-error')) {
+      next = document.createElement('div');
+      next.className = 'field-error';
+      el.parentNode.insertBefore(next, el.nextSibling);
+    }
+    next.textContent = msg;
+  }
+  function clearFieldErrors(formEl) {
+    Array.from(formEl.querySelectorAll('.field-error')).forEach(n => n.remove());
+  }
+
   if (form) {
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       statusEl.textContent = '';
+      clearFieldErrors(form);
+
+      const name = (form.querySelector('input[name="name"]') || {}).value || '';
+      const email = (form.querySelector('input[name="email"]') || {}).value || '';
+      const phone = (form.querySelector('input[name="phone"]') || {}).value || '';
+      const message = (form.querySelector('textarea[name="message"]') || {}).value || '';
+
+      let hasError = false;
+      if (name.trim().length < 2) { hasError = true; showFieldError(form.querySelector('input[name="name"]'), 'Indica tu nombre (mínimo 2 caracteres)'); }
+      if (!validateEmail(email)) { hasError = true; showFieldError(form.querySelector('input[name="email"]'), 'Correo inválido'); }
+      if (!validatePhone(phone)) { hasError = true; showFieldError(form.querySelector('input[name="phone"]'), 'Teléfono inválido'); }
+      if (message.trim().length < 10) { hasError = true; showFieldError(form.querySelector('textarea[name="message"]'), 'Mensaje muy corto (mínimo 10 caracteres)'); }
+      if (hasError) { statusEl.textContent = 'Corrige los errores del formulario.'; statusEl.className = 'form-status error'; return; }
+
       const action = form.getAttribute('action') || '';
       if (action.includes('YOUR_FORM_ID')) {
         statusEl.textContent = 'Sustituye YOUR_FORM_ID en el atributo "action" por tu endpoint de Formspree (ver SITE_README).';
@@ -44,6 +80,34 @@ document.addEventListener('DOMContentLoaded', function () {
           statusEl.textContent = 'Gracias — tu mensaje fue enviado con éxito.';
           statusEl.className = 'form-status success';
           form.reset();
+
+          // optional: forward to Google Sheets endpoint
+          const sheetEndpoint = form.getAttribute('data-sheet-endpoint') || '';
+          if (sheetEndpoint) {
+            try {
+              await fetch(sheetEndpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, phone, message, date: new Date().toISOString() })
+              });
+            } catch (err) {
+              console.warn('Error forwarding to sheet endpoint', err);
+            }
+          }
+
+          // optional: forward to email webhook
+          const emailEndpoint = form.getAttribute('data-email-endpoint') || '';
+          if (emailEndpoint) {
+            try {
+              await fetch(emailEndpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, phone, message })
+              });
+            } catch (err) {
+              console.warn('Error forwarding to email endpoint', err);
+            }
+          }
         } else {
           const json = await res.json().catch(()=>null);
           statusEl.textContent = (json && json.error) ? json.error : 'Ocurrió un error al enviar. Intenta de nuevo más tarde.';
