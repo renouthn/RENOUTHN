@@ -119,4 +119,22 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  // WhatsApp button click tracking (Google Analytics / gtag / dataLayer)
+  const waBtn = document.getElementById('whatsappButton');
+  if (waBtn) {
+    waBtn.addEventListener('click', function () {
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'whatsapp_click', { event_category: 'engagement', event_label: 'whatsapp_button' });
+        } else if (typeof ga === 'function') {
+          ga('send', 'event', 'engagement', 'whatsapp_click');
+        } else if (window.dataLayer && Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({ event: 'whatsapp_click', category: 'engagement', label: 'whatsapp_button' });
+        }
+      } catch (err) {
+        console.warn('Analytics tracking failed', err);
+      }
+    });
+  }
 });
