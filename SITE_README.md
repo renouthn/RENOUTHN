@@ -48,3 +48,8 @@ Código relevante:
 - `assets/js/main.js` — validación, envío a Formspree y reenvío opcional a los endpoints configurados.
 
 Si quieres, puedo crear el Apps Script por ti — necesitaré que pegues aquí la ID de tu Google Sheet, o puedes hacerlo y pegarme la URL del web app para que yo actualice `index.html` automáticamente.
+
+WhatsApp Business
+- Para añadir un botón de WhatsApp Business, reemplaza `YOUR_NUMBER_HERE` en el enlace de `index.html` por tu número internacional sin signos ni espacios (ejemplo México: `5215512345678`).
+- El botón abrirá una conversación directa con el mensaje predefinido: "Hola RENOUT, me interesa una propiedad".
+- Si prefieres, puedo cambiar el texto por defecto o mostrar un botón condicional sólo en móviles.

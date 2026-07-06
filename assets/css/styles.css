@@ -60,3 +60,15 @@ input,textarea{width:100%;padding:12px;border:1px solid #e6eef6;border-radius:10
 	.header-inner{grid-template-columns:1fr;}
 	.nav{display:none}
 }
+
+/* WhatsApp floating action button */
+.whatsapp-fab{position:fixed;right:20px;bottom:22px;width:56px;height:56px;border-radius:999px;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(37,211,102,0.16);z-index:60;text-decoration:none}
+.whatsapp-fab svg{display:block}
+.whatsapp-fab:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(37,211,102,0.18)}
+
+/* inline field error */
+.field-error{color:#d03838;font-size:.9rem;margin-top:6px}
+
+@media(max-width:480px){
+  .whatsapp-fab{right:14px;bottom:16px;width:48px;height:48px}
+}
