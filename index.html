@@ -41,14 +41,26 @@
   <section class="hero">
     <div class="hero-inner container">
       <div class="hero-text">
-        <h1>Encuentra la propiedad perfecta</h1>
-        <p class="lead">Rentas y ventas con asesoría local — filtros inteligentes y visitas rápidas.</p>
+        <span class="hero-badge">RENOUT</span>
+        <h1>Encuentra tu próximo hogar o inversión con confianza</h1>
+        <p class="lead">Rentas y ventas con asesoría local, búsqueda rápida y opciones ajustadas a tu presupuesto.</p>
+        <div class="hero-highlights">
+          <div class="highlight-item">✔️ Asesoría personalizada</div>
+          <div class="highlight-item">✔️ Propiedades verificadas</div>
+          <div class="highlight-item">✔️ Respuestas en menos de 24 horas</div>
+        </div>
         <div class="hero-actions">
           <a class="button primary" href="#listings">Ver propiedades</a>
-          <a class="button ghost" href="#contact">Publicar oferta</a>
+          <a class="button ghost" href="#contact">Hablar con un asesor</a>
         </div>
       </div>
-      <div class="hero-visual" aria-hidden="true"></div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-card">
+          <span>Nuevo</span>
+          <h3>Viviendas premium con ubicación estratégicA</h3>
+          <p>Asesoría completa, visitas seguras y contrato digital.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -57,7 +69,7 @@
       <div class="about-grid">
         <div>
           <h2>Sobre RENOUT</h2>
-          <p>RENOUT simplifica la búsqueda de renta y compra de propiedades. Diseñado para ofrecer listados claros, contacto rápido y navegación responsive.</p>
+          <p>RENOUT simplifica la búsqueda de renta y compra de propiedades con un enfoque moderno y confiable. Encuentra opciones claras, contacto rápido y soluciones adaptadas a tu estilo de vida.</p>
         </div>
         <div class="stats">
           <div><strong>1,200+</strong><span>propiedades</span></div>
@@ -67,8 +79,32 @@
       </div>
     </section>
 
+    <section class="card feature-section">
+      <h2>Nuestros servicios</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Búsqueda avanzada</h3>
+          <p>Encuentra propiedades filtrando precio, zona y comodidades en segundos.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Soporte local</h3>
+          <p>Agentes locales disponibles para resolver dudas y coordinar visitas.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Proceso seguro</h3>
+          <p>Contratos y pagos con transparencia para proteger tu inversión.</p>
+        </article>
+      </div>
+    </section>
+
     <section id="listings" class="card">
-      <h2>Propiedades destacadas</h2>
+      <div class="section-header">
+        <div>
+          <h2>Propiedades destacadas</h2>
+          <p>Seleccionamos las mejores opciones entre renta y venta para que elijas con confianza.</p>
+        </div>
+        <a class="button ghost" href="#contact">Ver más</a>
+      </div>
       <div class="grid">
         <article class="listing">
           <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=60')"></div>
@@ -118,21 +154,21 @@
     </section>
 
     <section id="contact" class="card contact-card">
-      <h2>Contacto</h2>
-      <p>Déjanos tus datos y te contactamos en breve.</p>
-      <!--
-        data-sheet-endpoint: (opcional) URL de Google Apps Script web app para guardar en Google Sheets
-        data-email-endpoint: (opcional) webhook para enviar copias por email
-      -->
+      <div class="section-header">
+        <div>
+          <h2>Contacto</h2>
+          <p>Escribe tus datos y un asesor te responderá rápido por WhatsApp o correo.</p>
+        </div>
+      </div>
       <form id="contactForm" action="https://formspree.io/f/mqevjpng" method="POST" data-sheet-endpoint="" data-email-endpoint="">
         <div class="form-grid">
           <input type="text" name="name" placeholder="Nombre completo" required>
           <input type="email" name="email" placeholder="Correo electrónico" required>
-          <input type="text" name="phone" placeholder="Teléfono (opcional)">
-          <textarea name="message" placeholder="Mensaje" rows="4"></textarea>
+          <input type="text" name="phone" placeholder="Teléfono / WhatsApp (opcional)">
+          <textarea name="message" placeholder="Cuéntanos qué buscas" rows="4"></textarea>
         </div>
         <div class="form-actions">
-          <button class="button primary" type="submit">Enviar</button>
+          <button class="button primary" type="submit">Enviar mensaje</button>
           <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
         </div>
       </form>
