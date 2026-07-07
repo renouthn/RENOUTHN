@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://renouthn.github.io/RENOUTHN/sitemap.xml
